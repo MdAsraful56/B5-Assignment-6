@@ -1,7 +1,12 @@
 import { createBrowserRouter } from 'react-router';
 import App from '../App';
 import AboutPage from '../Page/AboutPage';
+import DrivePage from '../Page/DrivePage';
 import HomePage from '../Page/HomePage';
+import LoginPage from '../Page/LoginPage';
+import RegisterPage from '../Page/RegisterPage';
+import RidePage from '../Page/RidePage';
+import ServicePage from '../Page/ServicePage';
 
 export const router = createBrowserRouter([
     {
@@ -15,6 +20,26 @@ export const router = createBrowserRouter([
             {
                 Component: AboutPage,
                 path: 'about',
+            },
+            {
+                Component: RidePage,
+                path: 'ride',
+            },
+            {
+                Component: DrivePage,
+                path: 'drive',
+            },
+            {
+                Component: LoginPage,
+                path: 'login',
+            },
+            {
+                Component: RegisterPage,
+                path: 'register',
+            },
+            {
+                Component: ServicePage,
+                path: 'service',
             },
         ],
     },
