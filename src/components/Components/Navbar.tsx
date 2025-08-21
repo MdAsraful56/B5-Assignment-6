@@ -15,6 +15,7 @@ import {
     PopoverTrigger,
 } from '@/components/ui/popover';
 import { Link } from 'react-router';
+import { role } from '../../Constants/role';
 import {
     authApi,
     useLogoutMutation,
@@ -25,10 +26,12 @@ import { ModeToggle } from './mode-toggle';
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
-    { href: '/', label: 'Home' },
+    { href: '/', label: 'Home', role: 'PUBLIC' },
+    { href: '/ride', label: 'Ride', role: role.rider },
+    { href: '/drive', label: 'Drive', role: role.driver },
     { href: '/service', label: 'Service' },
     { href: '#', label: 'Pricing' },
-    { href: '/about', label: 'About' },
+    { href: '/about', label: 'About', role: 'PUBLIC' },
 ];
 
 export default function Navbar() {
