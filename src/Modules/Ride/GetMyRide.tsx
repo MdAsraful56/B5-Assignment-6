@@ -1,0 +1,118 @@
+import { MdDeleteForever } from 'react-icons/md';
+import { RxUpdate } from 'react-icons/rx';
+import { useGetRideQuery } from '../../Redux/Features/Ride/ride.api';
+
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from '@/components/ui/table';
+
+// const items = [
+//     {
+//         id: '1',
+//         name: 'Alex Thompson',
+//         email: 'alex.t@company.com',
+//         location: 'San Francisco, US',
+//         status: 'Active',
+//         balance: '$1,250.00',
+//     },
+//     {
+//         id: '2',
+//         name: 'Sarah Chen',
+//         email: 'sarah.c@company.com',
+//         location: 'Singapore',
+//         status: 'Active',
+//         balance: '$600.00',
+//     },
+//     {
+//         id: '3',
+//         name: 'James Wilson',
+//         email: 'j.wilson@company.com',
+//         location: 'London, UK',
+//         status: 'Inactive',
+//         balance: '$650.00',
+//     },
+//     {
+//         id: '4',
+//         name: 'Maria Garcia',
+//         email: 'm.garcia@company.com',
+//         location: 'Madrid, Spain',
+//         status: 'Active',
+//         balance: '$0.00',
+//     },
+//     {
+//         id: '5',
+//         name: 'David Kim',
+//         email: 'd.kim@company.com',
+//         location: 'Seoul, KR',
+//         status: 'Active',
+//         balance: '-$1,000.00',
+//     },
+// ];
+
+const GetMyRide = () => {
+    const { data, error, isLoading } = useGetRideQuery(undefined);
+
+    const items = data?.data?.rides?.result || [];
+
+    if (isLoading) return <div>Loading...</div>;
+    if (error)
+        return (
+            <div>
+                Error:{' '}
+                {typeof error === 'object' &&
+                error !== null &&
+                'message' in error
+                    ? (error as { message: string }).message
+                    : 'An error occurred.'}
+            </div>
+        );
+    if (!data || data.length === 0) return <div>No rides found.</div>;
+
+    return (
+        <div className='border rounded-md p-2'>
+            <Table>
+                <TableHeader>
+                    <TableRow className='hover:bg-transparent'>
+                        <TableHead>Pickup Location</TableHead>
+                        <TableHead>Drop Location</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Amount</TableHead>
+                        <TableHead className='text-right'>Action</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {items.map((item) => (
+                        <TableRow key={item._id}>
+                            <TableCell className='font-medium'>
+                                {item.pickupLocation}
+                            </TableCell>
+                            <TableCell>{item.dropLocation}</TableCell>
+                            <TableCell>{item.status}</TableCell>
+                            <TableCell>$ {item.payment}</TableCell>
+                            <TableCell className='text-right'>
+                                <div className='flex flex-row justify-end gap-4'>
+                                    <button className='border rounded-md p-1 hover:bg-amber-400'>
+                                        <RxUpdate size={20} />
+                                    </button>
+                                    <button className='border rounded-md p-1 hover:bg-orange-500'>
+                                        <MdDeleteForever
+                                            size={20}
+                                            color='red'
+                                        />
+                                    </button>
+                                </div>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </div>
+    );
+};
+
+export default GetMyRide;

@@ -15,12 +15,14 @@ import * as React from 'react';
 import { Navigate } from 'react-router';
 import { toast } from 'sonner';
 import { useUserInfoQuery } from '../../Redux/Features/Auth/auth.api';
+import { useCreateRideMutation } from '../../Redux/Features/Ride/ride.api';
 
 const CreateRide = () => {
     const { data } = useUserInfoQuery(undefined);
-    console.log('User Info:', data);
+    // console.log('User Info:', data);
+    const [createRide] = useCreateRideMutation();
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const pickupLocation = String(formData.get('pickupLocation') || '');
@@ -53,9 +55,27 @@ const CreateRide = () => {
             pickupLocation,
             dropLocation,
             payment: parseFloat(payment),
-            userId: data?.data?.data?._id,
+            user: data?.data?.data?._id,
         };
         console.log('Ride Data:', rideData);
+
+        try {
+            await createRide(rideData)
+                .unwrap()
+                .then(() => {
+                    toast.success('Ride created successfully');
+                })
+                .catch((error) => {
+                    console.error('Error creating ride:', error);
+                    toast.error('Failed to create ride');
+                });
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                toast.error(`An error occurred: ${error.message}`);
+            } else {
+                toast.error('An unknown error occurred');
+            }
+        }
 
         event.currentTarget.reset();
     };
