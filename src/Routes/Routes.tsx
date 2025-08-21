@@ -4,6 +4,7 @@ import AboutPage from '../Page/AboutPage';
 import DrivePage from '../Page/DrivePage';
 import HomePage from '../Page/HomePage';
 import LoginPage from '../Page/LoginPage';
+import RegisterPage from '../Page/RegisterPage';
 import RidePage from '../Page/RidePage';
 import ServicePage from '../Page/ServicePage';
 
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
             {
                 Component: LoginPage,
                 path: 'login',
+            },
+            {
+                Component: RegisterPage,
+                path: 'register',
             },
             {
                 Component: ServicePage,

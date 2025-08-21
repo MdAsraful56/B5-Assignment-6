@@ -126,7 +126,7 @@ export default function Navbar() {
                         size='sm'
                         className='text-sm'
                     >
-                        <a href='#'>Sign In</a>
+                        <a href='/login'>Sign In</a>
                     </Button>
                     <Button asChild size='sm' className='text-sm'>
                         <ModeToggle />

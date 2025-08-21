@@ -29,7 +29,7 @@ const LoginSection = () => {
                         </div>
                         <div className='flex-1'>
                             <Button className='w-full hover:bg-amber-600'>
-                                <Link to='/login'>Create an Account</Link>
+                                <Link to='/register'>Create an Account</Link>
                             </Button>
                         </div>
                     </div>
