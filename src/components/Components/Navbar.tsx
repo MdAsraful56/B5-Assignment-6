@@ -1,5 +1,7 @@
 // import Logo from '@/components/logo';
-import Logo from '@/assets/Images/Logo/Logo.png';
+// import Logo from '@/assets/Images/Logo/Logo.png';
+// import Logo from '@/assets/Images/Logo/logo (1).png';
+import Logo from '@/assets/Images/Logo/logo (2).png';
 import { Button } from '@/components/ui/button';
 import {
     NavigationMenu,
@@ -16,8 +18,8 @@ import { ModeToggle } from './mode-toggle';
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
-    { href: '#', label: 'Home', active: true },
-    { href: '#', label: 'Features' },
+    { href: '/', label: 'Home' },
+    { href: '/service', label: 'Service' },
     { href: '#', label: 'Pricing' },
     { href: '/about', label: 'About' },
 ];
@@ -78,7 +80,6 @@ export default function Navbar() {
                                                 <NavigationMenuLink
                                                     href={link.href}
                                                     className='py-1.5'
-                                                    active={link.active}
                                                 >
                                                     {link.label}
                                                 </NavigationMenuLink>
@@ -106,7 +107,6 @@ export default function Navbar() {
                                         className='h-full'
                                     >
                                         <NavigationMenuLink
-                                            active={link.active}
                                             href={link.href}
                                             className='text-muted-foreground hover:text-primary border-b-primary hover:border-b-primary data-[active]:border-b-primary h-full justify-center rounded-none border-y-2 border-transparent py-1.5 font-medium hover:bg-transparent data-[active]:bg-transparent!'
                                         >

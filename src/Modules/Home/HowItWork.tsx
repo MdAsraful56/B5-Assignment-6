@@ -15,7 +15,7 @@ const HowItWork = () => {
                     driver will be on their way in moments. Your safety and
                     comfort are our top priorities.
                 </p>
-                <Button>Read More</Button>
+                <Button className='hover:bg-amber-600'>Read More</Button>
             </div>
             {/* second div section  */}
             <div className='flex flex-1 flex-col gap-5 p-2'>

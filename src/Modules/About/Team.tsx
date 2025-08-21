@@ -66,7 +66,10 @@ const Team = ({
 
                 <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
                     {members.map((member) => (
-                        <div key={member.id} className='p-6'>
+                        <div
+                            key={member.id}
+                            className='p-10 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300'
+                        >
                             <div className='flex flex-col items-center text-center'>
                                 <div className='mb-4'>
                                     <Avatar className='size-20 lg:size-24'>
