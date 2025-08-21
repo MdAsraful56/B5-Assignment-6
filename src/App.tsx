@@ -4,11 +4,11 @@ import CommonLayout from './Layout/CommonLayout';
 
 function App() {
     return (
-        <>
+        <div className=''>
             <CommonLayout>
                 <Outlet />
             </CommonLayout>
-        </>
+        </div>
     );
 }
 

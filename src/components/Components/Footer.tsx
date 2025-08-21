@@ -1,9 +1,25 @@
-import Logo from '@/assets/Images/Logo/Logo.png';
+// import Logo from '@/assets/Images/Logo/Logo.png';
+
+import { toast } from 'sonner';
 
 const Footer = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        if (email) {
+            // console.log(`Email submitted: ${email}`);
+            toast.success(`Thank you for subscribing with ${email}!`);
+            e.target.reset(); // Reset the form after submission
+        } else {
+            // console.error('Email is required');
+            toast.error('Please enter a valid email address.');
+        }
+    };
+
     return (
         <div>
-            <footer className='bg-white dark:bg-black'>
+            <footer className=''>
                 <div className='mx-auto max-w-screen-xl px-4 pt-16 pb-8 sm:px-6 lg:px-8'>
                     <div className='mx-auto max-w-md'>
                         <strong className='block text-center text-xl font-bold text-gray-900 sm:text-3xl dark:text-white'>
@@ -11,7 +27,7 @@ const Footer = () => {
                             news?
                         </strong>
 
-                        <form className='mt-6'>
+                        <form className='mt-6' onSubmit={handleSubmit}>
                             <div className='relative max-w-lg'>
                                 <label className='sr-only' htmlFor='email'>
                                     {' '}
@@ -22,10 +38,14 @@ const Footer = () => {
                                     className='w-full rounded-full border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium dark:border-gray-700 dark:bg-gray-800 dark:text-white'
                                     id='email'
                                     type='email'
+                                    name='email'
                                     placeholder='john@doe.com'
                                 />
 
-                                <button className='absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700'>
+                                <button
+                                    type='submit'
+                                    className='absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700'
+                                >
                                     Subscribe
                                 </button>
                             </div>
@@ -35,7 +55,7 @@ const Footer = () => {
                     <div className='mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32'>
                         <div className='mx-auto max-w-sm lg:max-w-none'>
                             <div className=''>
-                                <img src={Logo} alt='' className='' />
+                                {/* <img src={Logo} alt='' className='' /> */}
                             </div>
                             <p className='mt-4 text-center text-gray-500 lg:text-left lg:text-lg dark:text-gray-400'>
                                 We’re a team of passionate creators, developers,
