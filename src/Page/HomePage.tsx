@@ -1,11 +1,14 @@
 import { Outlet } from 'react-router';
+import { Available } from '../Modules/Home/Available';
 import FAQ from '../Modules/Home/FAQ';
+import HowItWork from '../Modules/Home/HowItWork';
 
 const HomePage = () => {
     return (
-        <div>
-            <h1 className='text-2xl font-bold mb-4'>Home Page</h1>
+        <div className='space-y-10 '>
             <Outlet />
+            <HowItWork />
+            <Available />
             <FAQ />
         </div>
     );
