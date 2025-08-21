@@ -4,6 +4,7 @@ import Choose from '../Modules/Home/Choose';
 import FAQ from '../Modules/Home/FAQ';
 import { HeroSection } from '../Modules/Home/HeroSection';
 import HowItWork from '../Modules/Home/HowItWork';
+import LoginSection from '../Modules/Home/LoginSection';
 import Review from '../Modules/Home/Review';
 
 const HomePage = () => {
@@ -13,6 +14,7 @@ const HomePage = () => {
 
             <HeroSection />
             <Choose />
+            <LoginSection />
             <HowItWork />
             <Available />
             <FAQ />

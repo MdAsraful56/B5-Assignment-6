@@ -38,12 +38,12 @@ const Choose = () => (
     Book rides instantly with verified drivers, enjoy comfortable journeys, and reach your destination safely and on time.'
         />
 
-        <div className='my-20'>
+        <div className='container mx-auto max-w-7xl'>
             <div className='p-10 space-y-5 flex flex-col md:flex-row lg:flex-row space-x-4 '>
                 {data.map((item) => (
                     <div
                         key={item.id}
-                        className='space-y-3 border border-blue-100 hover:border-amber-500 rounded-lg p-5 flex flex-1 flex-col'
+                        className='space-y-3 border h-[300px] border-blue-100 hover:border-amber-500 rounded-lg p-5 flex flex-1 flex-col'
                     >
                         <img
                             src={item.image}
@@ -54,7 +54,6 @@ const Choose = () => (
                         <p className='text-muted-foreground font-semibold'>
                             {item.description}
                         </p>
-
                         <Button className='hover:bg-amber-600'>
                             <Eye />
                             See More
