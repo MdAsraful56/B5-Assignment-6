@@ -14,6 +14,13 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui/popover';
+import { Link } from 'react-router';
+import {
+    authApi,
+    useLogoutMutation,
+    useUserInfoQuery,
+} from '../../Redux/Features/Auth/auth.api';
+import { useAppDispatch } from '../../Redux/hooks';
 import { ModeToggle } from './mode-toggle';
 
 // Navigation links array to be used in both desktop and mobile menus
@@ -25,6 +32,16 @@ const navigationLinks = [
 ];
 
 export default function Navbar() {
+    const { data } = useUserInfoQuery(undefined);
+    const [logout] = useLogoutMutation();
+    const dispatch = useAppDispatch();
+    console.log(data?.data?.data);
+
+    const handleLogout = async () => {
+        await logout(undefined);
+        dispatch(authApi.util.resetApiState());
+    };
+
     return (
         <header className='border-b px-4 md:px-6'>
             <div className='flex h-16 justify-between gap-4'>
@@ -120,17 +137,23 @@ export default function Navbar() {
                 </div>
                 {/* Right side */}
                 <div className='flex items-center gap-2'>
-                    <Button
-                        asChild
-                        variant='ghost'
-                        size='sm'
-                        className='text-sm'
-                    >
-                        <a href='/login'>Sign In</a>
-                    </Button>
                     <Button asChild size='sm' className='text-sm'>
                         <ModeToggle />
                     </Button>
+                    {data?.data?.data?.email && (
+                        <Button
+                            onClick={handleLogout}
+                            variant='outline'
+                            className='text-sm'
+                        >
+                            Logout
+                        </Button>
+                    )}
+                    {!data?.data?.data?.email && (
+                        <Button asChild className='text-sm'>
+                            <Link to='/login'>Login</Link>
+                        </Button>
+                    )}
                 </div>
             </div>
         </header>
