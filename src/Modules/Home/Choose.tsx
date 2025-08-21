@@ -1,56 +1,60 @@
 import { Eye } from 'lucide-react';
-import Icon01 from '../../assets/Images/Icon/Icon-01.svg';
+import Icon01 from '../../assets/Images/Icon/Icon (1).svg';
+import Icon02 from '../../assets/Images/Icon/Icon (2).svg';
+import Icon03 from '../../assets/Images/Icon/Icon (3).svg';
 import Section from '../../components/Components/Section';
 import { Button } from '../../components/ui/button';
 
 const data = [
     {
         id: 1,
-        title: 'Hello',
+        title: 'Fair Prices',
         description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus cumque, voluptatum, asperiores, voluptates.',
-        image: Icon01,
+            'Transparent and affordable fares with no hidden charges. Pay only for what you ride, with competitive pricing for every trip.',
+        image: Icon02,
     },
     {
         id: 2,
-        title: 'World',
+        title: 'Verified Drivers',
         description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus cumque, voluptatum, asperiores, voluptates.',
+            'All our drivers are background-checked, licensed, and trained to ensure your safety and comfort during every ride.',
         image: Icon01,
     },
     {
         id: 3,
-        title: 'React',
+        title: 'Luxury Cars',
         description:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus cumque, voluptatum,.',
-        image: Icon01,
+            'Choose from a wide range of premium vehicles for a smooth, stylish, and comfortable ride experience.',
+        image: Icon03,
     },
 ];
 
 const Choose = () => (
     <div className=''>
         <Section
-            heading={'Hello, There'}
-            description={
-                'lorem ralj f ac flf cfl wfs fsarf fnlaks fsfa fa fwrs safl w;afasfkw fs ksafk skc sasa frkfsfasklfsaf'
-            }
+            heading='Connecting You to Your Destination'
+            description='
+    Welcome to RideShareX – your reliable ride partner!
+    Book rides instantly with verified drivers, enjoy comfortable journeys, and reach your destination safely and on time.'
         />
+
         <div className='my-20'>
             <div className='p-10 space-y-5 flex flex-col md:flex-row lg:flex-row space-x-4 '>
                 {data.map((item) => (
                     <div
                         key={item.id}
-                        className='space-y-3 border border-blue-100 rounded-lg p-5 flex flex-1 flex-col'
+                        className='space-y-3 border border-blue-100 hover:border-amber-500 rounded-lg p-5 flex flex-1 flex-col'
                     >
                         <img
                             src={item.image}
                             alt={item.title}
-                            className='w-20 h-20 bg-amber-500 rounded-full'
+                            className='w-20 h-20 p-5 bg-amber-500 rounded-full'
                         />
                         <h3 className='text-lg font-semibold'>{item.title}</h3>
                         <p className='text-muted-foreground font-semibold'>
                             {item.description}
                         </p>
+
                         <Button className='hover:bg-amber-600'>
                             <Eye />
                             See More
