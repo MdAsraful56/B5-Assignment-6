@@ -11,6 +11,23 @@ export const rideApi = baseApi.injectEndpoints({
             invalidatesTags: ['RIDE'],
         }),
 
+        removeRide: builder.mutation({
+            query: (rideId) => ({
+                url: `/ride/${rideId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['RIDE'],
+        }),
+
+        updateRide: builder.mutation({
+            query: ({ rideId, rideInfo }) => ({
+                url: `/ride/${rideId}`,
+                method: 'PATCH',
+                data: rideInfo,
+            }),
+            invalidatesTags: ['RIDE'],
+        }),
+
         getRide: builder.query({
             query: () => ({
                 url: '/ride/my-rides',
@@ -21,4 +38,9 @@ export const rideApi = baseApi.injectEndpoints({
     }),
 });
 
-export const { useCreateRideMutation, useGetRideQuery } = rideApi;
+export const {
+    useCreateRideMutation,
+    useRemoveRideMutation,
+    useUpdateRideMutation,
+    useGetRideQuery,
+} = rideApi;
