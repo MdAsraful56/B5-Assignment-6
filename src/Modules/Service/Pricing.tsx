@@ -78,7 +78,7 @@ const Pricing = () => {
                                 <ul className='text-muted-foreground space-y-4'>
                                     <li className='flex items-center gap-2'>
                                         <Check className='size-4' />
-                                        <span>Up to 5 rides/month</span>
+                                        <span>Up to 2 rides/month</span>
                                     </li>
                                     <li className='flex items-center gap-2'>
                                         <Check className='size-4' />
@@ -87,6 +87,10 @@ const Pricing = () => {
                                     <li className='flex items-center gap-2'>
                                         <Check className='size-4' />
                                         <span>In-app chat support</span>
+                                    </li>
+                                    <li className='flex items-center gap-2'>
+                                        <Check className='size-4' />
+                                        <span>Free Ride for 1 to 5 km</span>
                                     </li>
                                 </ul>
                                 <Button className='w-full'>Get Started</Button>

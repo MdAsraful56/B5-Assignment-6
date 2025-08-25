@@ -30,7 +30,6 @@ const navigationLinks = [
     { href: '/ride', label: 'Ride', role: role.rider },
     { href: '/drive', label: 'Drive', role: role.driver },
     { href: '/service', label: 'Service' },
-    { href: '#', label: 'Pricing' },
     { href: '/about', label: 'About', role: 'PUBLIC' },
 ];
 
