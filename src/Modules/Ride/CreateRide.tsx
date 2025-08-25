@@ -16,6 +16,7 @@ import { Navigate } from 'react-router';
 import { toast } from 'sonner';
 import { useUserInfoQuery } from '../../Redux/Features/Auth/auth.api';
 import { useCreateRideMutation } from '../../Redux/Features/Ride/ride.api';
+import image from '../../assets/Images/ridesharing.webp';
 
 const CreateRide = () => {
     const { data } = useUserInfoQuery(undefined);
@@ -81,10 +82,13 @@ const CreateRide = () => {
     };
 
     return (
-        <div className=''>
-            <div className='flex flex-row items-center justify-between gap-10 my-10'>
+        <div className='flex flex-col md:flex-row items-center justify-center gap-20 my-10'>
+            <div className='flex-2'>
+                <img src={image} alt='Ride Sharing' className='rounded-2xl' />
+            </div>
+            <div className='flex flex-1 flex-col text-center items-center justify-between gap-10 my-10'>
                 <div className='space-y-4'>
-                    <h1 className='text-3xl font-bold'>Create a Ride</h1>
+                    <h1 className='text-3xl font-bold'>Create a New Ride</h1>
                     <p className='font-medium'>
                         Fill in the details below to create a new ride.
                     </p>

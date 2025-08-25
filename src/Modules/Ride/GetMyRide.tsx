@@ -70,7 +70,6 @@ type RideInfo = {
     dropLocation?: string;
     status?: string;
     payment?: number;
-    // Add other fields as needed
 };
 
 const GetMyRide = () => {

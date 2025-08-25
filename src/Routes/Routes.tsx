@@ -7,6 +7,9 @@ import LoginPage from '../Page/LoginPage';
 import RegisterPage from '../Page/RegisterPage';
 import RidePage from '../Page/RidePage';
 import ServicePage from '../Page/ServicePage';
+import UnauthorizedPage from '../Page/UnauthorizedPage';
+import DrivePrivateRoute from './DrivePrivateRoute';
+import RidePrivateRoute from './RidePrivateRoute';
 
 export const router = createBrowserRouter([
     {
@@ -22,12 +25,26 @@ export const router = createBrowserRouter([
                 path: 'about',
             },
             {
-                Component: RidePage,
-                path: 'ride',
+                Component: UnauthorizedPage,
+                path: 'unauthorized',
             },
             {
-                Component: DrivePage,
-                path: 'drive',
+                Component: RidePrivateRoute,
+                children: [
+                    {
+                        Component: RidePage,
+                        path: 'ride',
+                    },
+                ],
+            },
+            {
+                Component: DrivePrivateRoute,
+                children: [
+                    {
+                        Component: DrivePage,
+                        path: 'drive',
+                    },
+                ],
             },
             {
                 Component: LoginPage,
