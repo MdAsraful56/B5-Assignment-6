@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router';
 import CreatePick from '../Modules/Drive/CreatePick';
-import GetMyPick from '../Modules/Drive/GetMyPick';
 import GetAvailableRide from '../Modules/Drive/getAvailableRide';
+import GetMyPick from '../Modules/Drive/GetMyPick';
 
 const DrivePage = () => {
     return (

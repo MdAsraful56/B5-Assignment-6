@@ -13,6 +13,7 @@ const GetAvailableRide = () => {
         );
 
     const rides = data?.data || [];
+    // console.log(rides, 'available rides data');
 
     return (
         <div className='min-h-screen py-10 px-4'>

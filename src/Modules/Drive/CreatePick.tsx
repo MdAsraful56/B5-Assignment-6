@@ -1,5 +1,5 @@
 const CreatePick = () => {
-    return <div>CreatePick</div>;
+    return <div></div>;
 };
 
 export default CreatePick;

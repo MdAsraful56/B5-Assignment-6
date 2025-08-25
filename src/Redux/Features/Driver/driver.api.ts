@@ -20,10 +20,10 @@ export const driverApi = baseApi.injectEndpoints({
         // }),
 
         updateDrive: builder.mutation({
-            query: ({ rideId, rideInfo }) => ({
-                url: `/driver/update-ride-status/${rideId}`,
+            query: ({ id, pickInfo }) => ({
+                url: `/driver/update-ride-status/${id}`,
                 method: 'PATCH',
-                data: rideInfo,
+                body: pickInfo,
             }),
             invalidatesTags: ['DRIVER'],
         }),
