@@ -49,7 +49,7 @@ const features = [
 
 const Features = () => {
     return (
-        <div className='min-h-screen flex items-center justify-center py-12 bg-background'>
+        <div className='min-h-screen flex items-center justify-center mt-12 py-12 bg-background'>
             <div className='w-full'>
                 {/* Section Heading */}
                 <h2 className='text-4xl sm:text-5xl font-bold tracking-tight text-center'>

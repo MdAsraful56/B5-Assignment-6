@@ -3,10 +3,10 @@ import { baseApi } from '../../baseApi';
 export const driverApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         createDrive: builder.mutation({
-            query: (userInfo) => ({
-                url: `/driver/pick-up-ride/${userInfo.rideId}`,
-                method: 'POST',
-                data: userInfo,
+            query: ({ rideInfo, rideId }) => ({
+                url: `/driver/pick-up-ride/${rideId}`,
+                method: 'PATCH',
+                data: rideInfo,
             }),
             invalidatesTags: ['DRIVER'],
         }),
