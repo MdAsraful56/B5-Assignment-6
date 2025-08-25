@@ -1,6 +1,7 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { ArrowDownRight, Star } from 'lucide-react';
+import { Link } from 'react-router';
 
 interface Hero3Props {
     heading?: string;
@@ -31,7 +32,7 @@ const HeroSection = ({
     buttons = {
         primary: {
             text: 'Book a Ride',
-            url: '/book',
+            url: '/ride',
         },
         secondary: {
             text: 'Learn More',
@@ -109,9 +110,9 @@ const HeroSection = ({
                                 asChild
                                 className='w-full sm:w-auto hover:bg-amber-600'
                             >
-                                <a href={buttons.primary.url}>
+                                <Link to={buttons.primary.url}>
                                     {buttons.primary.text}
-                                </a>
+                                </Link>
                             </Button>
                         )}
                         {buttons.secondary && (
