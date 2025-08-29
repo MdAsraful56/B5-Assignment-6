@@ -13,7 +13,7 @@ const Pricing = () => {
     const [isAnnually, setIsAnnually] = useState(false);
 
     return (
-        <section className='py-32'>
+        <section className='py-32 px-10'>
             <div className='container'>
                 <div className='mx-auto flex max-w-7xl flex-col gap-6'>
                     <h2 className='text-pretty text-3xl font-bold lg:text-5xl'>
@@ -78,7 +78,7 @@ const Pricing = () => {
                                 <ul className='text-muted-foreground space-y-4'>
                                     <li className='flex items-center gap-2'>
                                         <Check className='size-4' />
-                                        <span>Up to 5 rides/month</span>
+                                        <span>Up to 2 rides/month</span>
                                     </li>
                                     <li className='flex items-center gap-2'>
                                         <Check className='size-4' />
@@ -87,6 +87,10 @@ const Pricing = () => {
                                     <li className='flex items-center gap-2'>
                                         <Check className='size-4' />
                                         <span>In-app chat support</span>
+                                    </li>
+                                    <li className='flex items-center gap-2'>
+                                        <Check className='size-4' />
+                                        <span>Free Ride for 1 to 5 km</span>
                                     </li>
                                 </ul>
                                 <Button className='w-full'>Get Started</Button>

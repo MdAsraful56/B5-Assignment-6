@@ -1,7 +1,7 @@
 import { role } from '../Constants/role';
+import { adminSidebarItems } from '../Routes/adminSidebarItems';
+import { userSidebarItems } from '../Routes/userSidebarItems';
 import type { TRole } from '../Types/Index';
-import { adminSidebarItems } from './adminSidebarItems';
-import { userSidebarItems } from './userSidebarItems';
 
 export const getSidebarItems = (userRole: TRole) => {
     switch (userRole) {

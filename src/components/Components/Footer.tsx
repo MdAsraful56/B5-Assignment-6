@@ -69,7 +69,7 @@ const Footer = () => {
                             <div className='mt-6 flex justify-center gap-4 lg:justify-start'>
                                 <a
                                     className='text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75'
-                                    href='#'
+                                    href='https://www.facebook.com/mdasraful4'
                                     target='_blank'
                                     rel='noreferrer'
                                 >
@@ -131,7 +131,7 @@ const Footer = () => {
 
                                 <a
                                     className='text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75'
-                                    href='#'
+                                    href='https://github.com/MdAsraful56'
                                     target='_blank'
                                     rel='noreferrer'
                                 >

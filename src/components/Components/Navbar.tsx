@@ -29,9 +29,11 @@ const navigationLinks = [
     { href: '/', label: 'Home', role: 'PUBLIC' },
     { href: '/ride', label: 'Ride', role: role.rider },
     { href: '/drive', label: 'Drive', role: role.driver },
-    { href: '/service', label: 'Service' },
-    { href: '#', label: 'Pricing' },
-    { href: '/about', label: 'About', role: 'PUBLIC' },
+    { href: '/features', label: 'Features', role: 'PUBLIC' },
+    { href: '/about', label: 'About Us', role: 'PUBLIC' },
+    { href: '/faq', label: 'FAQ', role: 'PUBLIC' },
+    { href: '/dashboard', label: 'Dashboard', role: 'ADMIN' },
+    { href: '/me', label: 'Me', role: 'USER' },
 ];
 
 export default function Navbar() {

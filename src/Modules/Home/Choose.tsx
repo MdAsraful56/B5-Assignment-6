@@ -10,7 +10,7 @@ const data = [
         id: 1,
         title: 'Fair Prices',
         description:
-            'Transparent and affordable fares with no hidden charges. Pay only for what you ride, with competitive pricing for every trip.',
+            'Transparent and affordable fares with no hidden charges. Pay only for what you ride, with competitive pricing for every.',
         image: Icon02,
     },
     {
@@ -43,7 +43,7 @@ const Choose = () => (
                 {data.map((item) => (
                     <div
                         key={item.id}
-                        className='space-y-3 border h-[300px] border-blue-100 hover:border-amber-500 rounded-lg p-5 flex flex-1 flex-col'
+                        className='space-y-3 p-5 border h-[320px] border-blue-100 hover:border-amber-500 rounded-lg flex flex-1 flex-col'
                     >
                         <img
                             src={item.image}

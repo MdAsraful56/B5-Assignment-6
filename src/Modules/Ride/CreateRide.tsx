@@ -161,7 +161,6 @@ const CreateRide = () => {
                     </DialogContent>
                 </Dialog>
             </div>
-            {/* <MyMap /> */}
         </div>
     );
 };

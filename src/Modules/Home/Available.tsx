@@ -35,7 +35,7 @@ const Available = ({
         desktop: {
             title: 'Desktop',
             subtitle: 'PC/Mac',
-            description: 'Complete desktop solution.',
+            description: 'Complete desktop / pc software solution.',
             buttonText: 'Download',
             url: '#',
         },

@@ -5,71 +5,21 @@ import {
     useUpdateRideMutation,
 } from '../../Redux/Features/Ride/ride.api';
 
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from '@/components/ui/table';
-import { Trash2 } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Clock, DollarSign, Flag, MapPin, Trash2 } from 'lucide-react';
+import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { DeleteConfirmation } from '../../components/Components/DeleteConfirmation';
 import { Update } from '../../components/Components/Update';
 import Loading from '../../components/Loading';
 import { Button } from '../../components/ui/button';
 
-// const items = [
-//     {
-//         id: '1',
-//         name: 'Alex Thompson',
-//         email: 'alex.t@company.com',
-//         location: 'San Francisco, US',
-//         status: 'Active',
-//         balance: '$1,250.00',
-//     },
-//     {
-//         id: '2',
-//         name: 'Sarah Chen',
-//         email: 'sarah.c@company.com',
-//         location: 'Singapore',
-//         status: 'Active',
-//         balance: '$600.00',
-//     },
-//     {
-//         id: '3',
-//         name: 'James Wilson',
-//         email: 'j.wilson@company.com',
-//         location: 'London, UK',
-//         status: 'Inactive',
-//         balance: '$650.00',
-//     },
-//     {
-//         id: '4',
-//         name: 'Maria Garcia',
-//         email: 'm.garcia@company.com',
-//         location: 'Madrid, Spain',
-//         status: 'Active',
-//         balance: '$0.00',
-//     },
-//     {
-//         id: '5',
-//         name: 'David Kim',
-//         email: 'd.kim@company.com',
-//         location: 'Seoul, KR',
-//         status: 'Active',
-//         balance: '-$1,000.00',
-//     },
-// ];
-
-// Define a type for rideInfo or import it if already defined
-
 type RideInfo = {
     pickupLocation?: string;
     dropLocation?: string;
     status?: string;
     payment?: number;
+    createdAt?: string;
 };
 
 const GetMyRide = () => {
@@ -77,31 +27,49 @@ const GetMyRide = () => {
     const [removeRide] = useRemoveRideMutation();
     const [updateRide] = useUpdateRideMutation();
 
+    const [search, setSearch] = useState('');
+    const [statusFilter, setStatusFilter] = useState('ALL');
+    const [fareMin, setFareMin] = useState('');
+    const [fareMax, setFareMax] = useState('');
+    const [dateFrom, setDateFrom] = useState('');
+    const [dateTo, setDateTo] = useState('');
+
+    const [page, setPage] = useState(1);
+    const itemsPerPage = 6;
+
     const items = data?.data?.rides?.result || [];
+    const activeRides = items.filter((ride) => ride.status !== 'COMPLETED');
 
-    if (isLoading)
-        return (
-            <div className='flex items-center justify-center h-screen'>
-                <Loading />
-            </div>
-        );
-    if (error)
-        return (
-            <div>
-                Error:{' '}
-                {typeof error === 'object' &&
-                error !== null &&
-                'message' in error
-                    ? (error as { message: string }).message
-                    : 'An error occurred.'}
-            </div>
-        );
-    if (!data || data.length === 0) return <div>No rides found.</div>;
+    const filteredRides = useMemo(() => {
+        return activeRides.filter((ride) => {
+            const matchesSearch =
+                ride.pickupLocation
+                    ?.toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                ride.dropLocation?.toLowerCase().includes(search.toLowerCase());
 
-    if (items.length === 0)
-        return (
-            <div className='text-center text-gray-500'>No rides available.</div>
-        );
+            const matchesStatus =
+                statusFilter === 'ALL' || ride.status === statusFilter;
+
+            const matchesFare =
+                (!fareMin || ride.payment >= Number(fareMin)) &&
+                (!fareMax || ride.payment <= Number(fareMax));
+
+            const rideDate = ride.createdAt ? new Date(ride.createdAt) : null;
+            const matchesDate =
+                (!dateFrom || (rideDate && rideDate >= new Date(dateFrom))) &&
+                (!dateTo || (rideDate && rideDate <= new Date(dateTo)));
+
+            return matchesSearch && matchesStatus && matchesFare && matchesDate;
+        });
+    }, [activeRides, search, statusFilter, fareMin, fareMax, dateFrom, dateTo]);
+
+    // Pagination
+    const totalPages = Math.ceil(filteredRides.length / itemsPerPage);
+    const paginatedRides = filteredRides.slice(
+        (page - 1) * itemsPerPage,
+        page * itemsPerPage
+    );
 
     const handleUpdateRide = async (rideId: string, rideInfo: RideInfo) => {
         const toastId = toast.loading('Updating...');
@@ -120,7 +88,6 @@ const GetMyRide = () => {
         const toastId = toast.loading('Removing...');
         try {
             const res = await removeRide(rideId).unwrap();
-
             if (res.success) {
                 toast.success('Removed', { id: toastId });
             }
@@ -130,72 +97,182 @@ const GetMyRide = () => {
         }
     };
 
+    if (isLoading)
+        return (
+            <div className='flex items-center justify-center h-screen'>
+                <Loading />
+            </div>
+        );
+
+    if (error)
+        return (
+            <div>
+                Error:{' '}
+                {typeof error === 'object' &&
+                error !== null &&
+                'message' in error
+                    ? (error as { message: string }).message
+                    : 'An error occurred.'}
+            </div>
+        );
+
+    if (!data || items.length === 0)
+        return (
+            <div className='text-center text-gray-500'>No rides available.</div>
+        );
+
     return (
-        <div className='border rounded-md p-2'>
-            <Table>
-                <TableHeader>
-                    <TableRow className='hover:bg-transparent'>
-                        <TableHead>Pickup Location</TableHead>
-                        <TableHead>Drop Location</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Amount</TableHead>
-                        <TableHead className='text-right'>Action</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {items.map((item) => (
-                        <TableRow key={item._id}>
-                            <TableCell className='font-medium'>
-                                {item.pickupLocation}
-                            </TableCell>
-                            <TableCell>{item.dropLocation}</TableCell>
-                            <TableCell>{item.status}</TableCell>
-                            <TableCell>$ {item.payment}</TableCell>
-                            <TableCell className='text-right'>
-                                <div className='flex flex-row justify-end gap-4'>
-                                    {/* <button className='border rounded-md p-1 hover:bg-amber-400'>
-                                        <RxUpdate size={20} />
-                                    </button> */}
+        <div className='max-w-6xl mx-auto my-10'>
+            <div className='text-center my-6 space-y-3'>
+                <h1 className='text-3xl font-bold'>My Rides</h1>
+                <p className='text-gray-600'>
+                    Manage your ongoing rides below.
+                </p>
+            </div>
 
-                                    <Update
-                                        ride={item}
-                                        onConfirm={(rideInfo) =>
-                                            handleUpdateRide(item._id, rideInfo)
-                                        }
+            {/* Filters */}
+            <div className='border p-4 rounded-lg shadow mb-6 space-y-4'>
+                <div className='flex flex-col md:flex-row gap-4'>
+                    <input
+                        type='text'
+                        placeholder='Search by location...'
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className='border p-2 rounded w-full'
+                    />
+                    <select
+                        value={statusFilter}
+                        onChange={(e) => setStatusFilter(e.target.value)}
+                        className='border p-2 rounded dark:bg-black'
+                    >
+                        <option value='ALL'>All Status</option>
+                        <option value='PENDING'>Pending</option>
+                        <option value='PICKED'>Picked</option>
+                        <option value='CANCELLED'>Cancelled</option>
+                    </select>
+                    <input
+                        type='number'
+                        placeholder='Min Fare'
+                        value={fareMin}
+                        onChange={(e) => setFareMin(e.target.value)}
+                        className='border p-2 rounded w-24'
+                    />
+                    <input
+                        type='number'
+                        placeholder='Max Fare'
+                        value={fareMax}
+                        onChange={(e) => setFareMax(e.target.value)}
+                        className='border p-2 rounded w-24'
+                    />
+                    <input
+                        type='date'
+                        value={dateFrom}
+                        onChange={(e) => setDateFrom(e.target.value)}
+                        className='border p-2 rounded'
+                    />
+                    <input
+                        type='date'
+                        value={dateTo}
+                        onChange={(e) => setDateTo(e.target.value)}
+                        className='border p-2 rounded'
+                    />
+                </div>
+            </div>
+
+            {/* Ride List */}
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                {paginatedRides.map((item) => (
+                    <Card
+                        key={item._id}
+                        className='shadow-lg border rounded-2xl hover:shadow-xl transition'
+                    >
+                        <CardHeader>
+                            <CardTitle className='flex items-center gap-2 text-lg'>
+                                <Clock className='text-amber-500' size={20} />
+                                Active Ride
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent className='space-y-3'>
+                            <div className='flex items-center gap-2'>
+                                <MapPin className='text-blue-500' size={18} />
+                                <span className='font-medium'>Pickup:</span>
+                                <span>{item.pickupLocation}</span>
+                            </div>
+                            <div className='flex items-center gap-2'>
+                                <Flag className='text-red-500' size={18} />
+                                <span className='font-medium'>Drop:</span>
+                                <span>{item.dropLocation}</span>
+                            </div>
+                            <div className='flex items-center gap-2'>
+                                <DollarSign
+                                    className='text-green-500'
+                                    size={18}
+                                />
+                                <span className='font-medium'>Amount:</span>
+                                <span>$ {item.payment}</span>
+                            </div>
+                            <div className='flex items-center gap-2'>
+                                <span className='font-medium'>Status:</span>
+                                <span className='text-amber-600'>
+                                    {item.status}
+                                </span>
+                            </div>
+
+                            <div className='flex justify-between gap-4 pt-2'>
+                                <Update
+                                    ride={item}
+                                    onConfirm={(rideInfo) =>
+                                        handleUpdateRide(item._id, rideInfo)
+                                    }
+                                >
+                                    <Button
+                                        size='sm'
+                                        className='bg-amber-300 hover:bg-amber-500 flex items-center gap-2'
                                     >
-                                        <Button
-                                            size='sm'
-                                            className='bg-amber-300 hover:bg-amber-500'
-                                        >
-                                            <RxUpdate size={20} />
-                                        </Button>
-                                    </Update>
+                                        <RxUpdate size={18} />
+                                        <span>Update</span>
+                                    </Button>
+                                </Update>
 
-                                    <DeleteConfirmation
-                                        onConfirm={() =>
-                                            handleRemoveRide(item._id)
-                                        }
+                                <DeleteConfirmation
+                                    onConfirm={() => handleRemoveRide(item._id)}
+                                >
+                                    <Button
+                                        size='sm'
+                                        className='bg-red-300 hover:bg-red-500 flex items-center gap-2'
                                     >
-                                        <Button
-                                            size='sm'
-                                            className='bg-red-300 hover:bg-red-500'
-                                        >
-                                            <Trash2 />
-                                        </Button>
-                                    </DeleteConfirmation>
+                                        <Trash2 size={18} />
+                                        <span>Delete</span>
+                                    </Button>
+                                </DeleteConfirmation>
+                            </div>
+                        </CardContent>
+                    </Card>
+                ))}
+            </div>
 
-                                    {/* <button className='border rounded-md p-1 hover:bg-orange-500'>
-                                        <MdDeleteForever
-                                            size={20}
-                                            color='red'
-                                        />
-                                    </button> */}
-                                </div>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+            {/* Pagination */}
+            {totalPages > 1 && (
+                <div className='flex justify-center items-center gap-4 mt-8'>
+                    <Button
+                        disabled={page === 1}
+                        onClick={() => setPage((prev) => prev - 1)}
+                        variant='outline'
+                    >
+                        Prev
+                    </Button>
+                    <span>
+                        Page {page} of {totalPages}
+                    </span>
+                    <Button
+                        disabled={page === totalPages}
+                        onClick={() => setPage((prev) => prev + 1)}
+                        variant='outline'
+                    >
+                        Next
+                    </Button>
+                </div>
+            )}
         </div>
     );
 };
