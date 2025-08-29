@@ -1,4 +1,4 @@
-import FAQ from '../Modules/Home/FAQ';
+import FAQ from '../Modules/FAQ';
 
 const FAQPage = () => {
     return (

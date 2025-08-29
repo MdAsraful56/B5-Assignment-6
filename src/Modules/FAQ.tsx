@@ -62,7 +62,7 @@ const items = [
 export default function FAQ() {
     return (
         <div className='space-y-4'>
-            <h2 className='text-xl font-bold text-center py-3'>
+            <h2 className='text-2xl mt-5 font-bold text-center py-3'>
                 Frequently Asked Questions
             </h2>
             <Accordion

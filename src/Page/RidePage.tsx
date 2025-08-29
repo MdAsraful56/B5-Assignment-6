@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router';
 import CreateRide from '../Modules/Ride/CreateRide';
-import Features from '../Modules/Ride/Features';
 import GetCompletedRide from '../Modules/Ride/GetCompletedRide';
 import GetMyRide from '../Modules/Ride/GetMyRide';
 
@@ -11,7 +10,7 @@ const RidePage = () => {
             <CreateRide />
             <GetMyRide />
             <GetCompletedRide />
-            <Features />
+            {/* <Features /> */}
         </div>
     );
 };
