@@ -31,6 +31,7 @@ const navigationLinks = [
     { href: '/drive', label: 'Drive', role: role.driver },
     { href: '/service', label: 'Service' },
     { href: '/about', label: 'About', role: 'PUBLIC' },
+    { href: '/dashboard', label: 'Dashboard' },
 ];
 
 export default function Navbar() {
