@@ -35,6 +35,14 @@ export const rideApi = baseApi.injectEndpoints({
             }),
             providesTags: ['RIDE'],
         }),
+
+        getAllRide: builder.query({
+            query: () => ({
+                url: '/ride/all-rides',
+                method: 'GET',
+            }),
+            providesTags: ['RIDE'],
+        }),
     }),
 });
 
@@ -43,4 +51,5 @@ export const {
     useRemoveRideMutation,
     useUpdateRideMutation,
     useGetRideQuery,
+    useGetAllRideQuery,
 } = rideApi;

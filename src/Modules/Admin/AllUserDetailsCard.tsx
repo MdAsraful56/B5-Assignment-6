@@ -41,7 +41,9 @@ export default function AllUserDetailsCard({
     return (
         <section className='w-full min-h-screen bg-gray-50 py-12'>
             <div className='max-w-6xl mx-auto px-6'>
-                <h1 className='text-3xl font-bold mb-6'>User Management</h1>
+                <h1 className='text-3xl font-bold mb-6'>
+                    User Management <span className=''>({users.length})</span>
+                </h1>
 
                 <Card>
                     <CardContent className='overflow-x-auto'>

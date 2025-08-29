@@ -19,15 +19,28 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ pick }) => {
     const [updateDrive] = useUpdateDriveMutation();
 
-    const handleComplete = async (id: string, pick: Pick) => {
+    // const handleComplete = async (id: string, pick: Pick) => {
+    //     try {
+    //         const res = await updateDrive({
+    //             id,
+    //             status: 'COMPLETED',
+    //         }).unwrap();
+    //         console.log(res, 'response from handle complete');
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+
+    const handleComplete = async (id: string) => {
         try {
-            const res = await updateDrive({ id, pick }).unwrap();
+            const res = await updateDrive({
+                id,
+                status: 'COMPLETED',
+            }).unwrap();
             console.log(res, 'response from handle complete');
         } catch (error) {
             console.log(error);
         }
-
-        // updateDrive({ id, data: { status: 'COMPLETED' } }).unwrap();
     };
 
     return (

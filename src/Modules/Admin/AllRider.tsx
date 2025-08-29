@@ -41,7 +41,6 @@ const AllRider = () => {
 
     return (
         <div>
-            <h1 className='text-2xl font-bold'>All Riders</h1>
             <span className='text-muted'> ({data?.data?.length || 0})</span>
 
             {data?.data ? (

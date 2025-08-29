@@ -1,3 +1,4 @@
+import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
 import { toast } from 'sonner';
 import {
     useDeleteUserMutation,
@@ -10,6 +11,19 @@ const AllUser = () => {
     const { data, isLoading } = useGetAllUsersQuery(undefined);
     const [updateUser] = useUpdateUserMutation();
     const [deleteUser] = useDeleteUserMutation();
+
+    // console.log(data?.data);
+
+    const users = data?.data || [];
+
+    const driverRole = users.filter((user) => user.role === 'DRIVER').length;
+    const riderRole = users.filter((user) => user.role === 'RIDER').length;
+
+    // Pie chart data
+    const pieData = [
+        { name: 'Drivers', value: driverRole, color: '#4CAF50' }, // Green
+        { name: 'Riders', value: riderRole, color: '#2196F3' }, // Blue
+    ];
 
     // Role update function
     const handleUpdateRole = async (id: string, role: 'RIDER' | 'DRIVER') => {
@@ -50,6 +64,26 @@ const AllUser = () => {
             ) : (
                 <p>No users found.</p>
             )}
+
+            {/* Pie Chart Section */}
+            <div className='mt-10 flex justify-center'>
+                <PieChart width={400} height={400}>
+                    <Pie
+                        data={pieData}
+                        dataKey='value'
+                        cx='50%'
+                        cy='50%'
+                        outerRadius={120}
+                        label={(entry) => `${entry.name} (${entry.value})`}
+                    >
+                        {pieData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend verticalAlign='bottom' height={36} />
+                </PieChart>
+            </div>
         </div>
     );
 };

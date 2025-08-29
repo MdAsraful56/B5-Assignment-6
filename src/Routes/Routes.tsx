@@ -3,11 +3,13 @@ import App from '../App';
 import DashboardLayout from '../Layout/DashboardLayout';
 import AboutPage from '../Page/AboutPage';
 import DrivePage from '../Page/DrivePage';
+import FAQPage from '../Page/FAQPage';
+import FeaturesPage from '../Page/FeaturesPage';
 import HomePage from '../Page/HomePage';
 import LoginPage from '../Page/LoginPage';
+import MePage from '../Page/MePage';
 import RegisterPage from '../Page/RegisterPage';
 import RidePage from '../Page/RidePage';
-import ServicePage from '../Page/ServicePage';
 import UnauthorizedPage from '../Page/UnauthorizedPage';
 import { generateRoutes } from '../Utils/generateRoutes';
 import { adminSidebarItems } from './adminSidebarItems';
@@ -24,12 +26,24 @@ export const router = createBrowserRouter([
                 index: true,
             },
             {
+                Component: FeaturesPage,
+                path: 'features',
+            },
+            {
                 Component: AboutPage,
                 path: 'about',
             },
             {
+                Component: FAQPage,
+                path: 'faq',
+            },
+            {
                 Component: UnauthorizedPage,
                 path: 'unauthorized',
+            },
+            {
+                Component: MePage,
+                path: 'me',
             },
             {
                 Component: RidePrivateRoute,
@@ -73,10 +87,6 @@ export const router = createBrowserRouter([
     },
     {
         Component: RegisterPage,
-        path: '`/register',
-    },
-    {
-        Component: ServicePage,
-        path: '/service',
+        path: '/register',
     },
 ]);
