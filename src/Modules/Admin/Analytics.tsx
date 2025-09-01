@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import DriverAnalytic from './DriverAnalytic';
 import Earning from './Earning';
+import OverView from './OverView';
 import RideAnalytics from './RideAnalytic';
 
 const Analytics = () => {
@@ -13,7 +14,7 @@ const Analytics = () => {
                 View detailed analytics and reports here.
             </p>
 
-            <Tabs className='' defaultValue='overview'>
+            <Tabs className='mb-10' defaultValue='overview'>
                 <TabsList className='flex justify-center space-x-4'>
                     <TabsTrigger value='overview'>Overview</TabsTrigger>
                     <TabsTrigger value='drivers'>Drivers</TabsTrigger>
@@ -22,7 +23,7 @@ const Analytics = () => {
                 </TabsList>
 
                 <TabsContent value='overview'>
-                    {/* এখানে আপনার OverviewAnalytics কম্পোনেন্ট থাকবে */}
+                    <OverView />
                 </TabsContent>
                 <TabsContent value='drivers'>
                     <DriverAnalytic />
