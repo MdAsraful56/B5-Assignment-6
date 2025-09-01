@@ -2,10 +2,8 @@ import AllDriver from '../Modules/Admin/AllDriver';
 import AllRider from '../Modules/Admin/AllRider';
 import AllUser from '../Modules/Admin/AllUser';
 import Analytics from '../Modules/Admin/Analytics';
-import CreateRide from '../Modules/Admin/Rider/CreateRide';
-import GetMyRide from '../Modules/Admin/Rider/GetMyRide';
-import RideAnalytics from '../Modules/Admin/Rider/RideAnalytic';
-import GetCompletedRide from '../Modules/Ride/GetCompletedRide';
+import DriverAnalytic from '../Modules/Admin/DriverAnalytic';
+import RideAnalytics from '../Modules/Admin/RideAnalytic';
 import type { ISidebarItem } from '../Types/Index';
 
 export const adminSidebarItems: ISidebarItem[] = [
@@ -49,19 +47,40 @@ export const adminSidebarItems: ISidebarItem[] = [
                 component: RideAnalytics,
             },
             {
-                title: 'Create Ride',
-                url: '/dashboard/create-ride',
-                component: CreateRide,
+                title: 'All Riders',
+                url: '/dashboard/all-riders',
+                component: AllRider,
+            },
+            // {
+            //     title: 'Create Ride',
+            //     url: '/dashboard/create-ride',
+            //     component: CreateRide,
+            // },
+            // {
+            //     title: 'Get My Ride',
+            //     url: '/dashboard/get-my-ride',
+            //     component: GetMyRide,
+            // },
+            // {
+            //     title: 'Get Completed Ride',
+            //     url: '/dashboard/get-completed-ride',
+            //     component: GetCompletedRide,
+            // },
+        ],
+    },
+
+    {
+        title: 'Driver',
+        items: [
+            {
+                title: 'Driver Analytics',
+                url: '/dashboard/driver-analytics',
+                component: DriverAnalytic,
             },
             {
-                title: 'Get My Ride',
-                url: '/dashboard/get-my-ride',
-                component: GetMyRide,
-            },
-            {
-                title: 'Get Completed Ride',
-                url: '/dashboard/get-completed-ride',
-                component: GetCompletedRide,
+                title: 'All Drivers',
+                url: '/dashboard/all-drivers',
+                component: AllDriver,
             },
         ],
     },

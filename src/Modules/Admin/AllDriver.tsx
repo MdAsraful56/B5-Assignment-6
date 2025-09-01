@@ -41,7 +41,7 @@ const AllDriver = () => {
 
     return (
         <div>
-            <span className='text-muted'> ({data?.data?.length || 0})</span>
+            {/* <span className='text-muted'> ({data?.data?.length || 0})</span> */}
 
             {data?.data ? (
                 <AllUserDetailsCard

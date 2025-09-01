@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // 👁 আইকন
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { toast } from 'sonner';
 import {
     useUpdateUserMutation,
@@ -13,12 +13,10 @@ const MePage = () => {
     const user = data?.data?.data;
 
     const [name, setName] = useState(user?.name || '');
-
     const [phone, setPhone] = useState(user?.phone || '');
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
     const [showOld, setShowOld] = useState(false);
     const [showNew, setShowNew] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
@@ -28,8 +26,7 @@ const MePage = () => {
 
     const handleUpdate = async (field: string) => {
         try {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            let payload: Record<string, any> = { id: user?._id };
+            let payload: Record<string, unknown> = { id: user?._id };
             if (field === 'name') payload = { id: user?._id, name };
             if (field === 'phone') payload = { id: user?._id, phone };
             if (field === 'password') {
@@ -53,11 +50,11 @@ const MePage = () => {
     return (
         <div className='max-w-2xl mx-auto p-6 space-y-8'>
             {/* Profile Info Card */}
-            <div className='bg-gray-100 rounded-lg shadow p-6'>
-                <h1 className='text-2xl font-bold mb-4 text-gray-800'>
+            <div className='rounded-lg shadow p-6 bg-white dark:bg-gray-800'>
+                <h1 className='text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200'>
                     My Profile
                 </h1>
-                <div className='space-y-2 text-gray-700'>
+                <div className='space-y-2 text-gray-700 dark:text-gray-300'>
                     <p>
                         <span className='font-semibold'>Name:</span>{' '}
                         {user?.name}
@@ -76,63 +73,60 @@ const MePage = () => {
                     </p>
                     <p>
                         <span className='font-semibold'>Status:</span>{' '}
-                        {user?.isActive}
+                        {user?.isActive ? 'Active' : 'Inactive'}
                     </p>
                 </div>
             </div>
-            {/* Update Name */}{' '}
-            <div className='bg-white rounded-lg shadow p-6 border'>
-                {' '}
-                <h2 className='text-lg font-semibold mb-3 text-gray-700'>
-                    {' '}
-                    Update Name{' '}
-                </h2>{' '}
+
+            {/* Update Name */}
+            <div className='rounded-lg shadow p-6 border bg-white dark:bg-gray-800 dark:border-gray-700'>
+                <h2 className='text-lg font-semibold mb-3 text-gray-700 dark:text-gray-200'>
+                    Update Name
+                </h2>
                 <div className='flex gap-2'>
-                    {' '}
                     <input
                         type='text'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className='border rounded w-full p-2 focus:ring-1 focus:ring-blue-400'
-                    />{' '}
+                        className='border rounded w-full p-2 focus:ring-1 focus:ring-blue-400
+                        bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600'
+                    />
                     <button
                         onClick={() => handleUpdate('name')}
                         disabled={isUpdating}
                         className='bg-blue-600 text-white px-4 rounded hover:bg-blue-700'
                     >
-                        {' '}
-                        Save{' '}
-                    </button>{' '}
-                </div>{' '}
-            </div>{' '}
-            {/* Update Phone */}{' '}
-            <div className='bg-white rounded-lg shadow p-6 border'>
-                {' '}
-                <h2 className='text-lg font-semibold mb-3 text-gray-700'>
-                    {' '}
-                    Update Phone{' '}
-                </h2>{' '}
+                        Save
+                    </button>
+                </div>
+            </div>
+
+            {/* Update Phone */}
+            <div className='rounded-lg shadow p-6 border bg-white dark:bg-gray-800 dark:border-gray-700'>
+                <h2 className='text-lg font-semibold mb-3 text-gray-700 dark:text-gray-200'>
+                    Update Phone
+                </h2>
                 <div className='flex gap-2'>
-                    {' '}
                     <input
                         type='number'
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className='border rounded w-full p-2 focus:ring-1 focus:ring-green-400'
-                    />{' '}
+                        className='border rounded w-full p-2 focus:ring-1 focus:ring-green-400
+                        bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600'
+                    />
                     <button
                         onClick={() => handleUpdate('phone')}
                         disabled={isUpdating}
                         className='bg-green-600 text-white px-4 rounded hover:bg-green-700'
                     >
-                        {' '}
-                        Save{' '}
-                    </button>{' '}
-                </div>{' '}
+                        Save
+                    </button>
+                </div>
             </div>
+
             {/* Update Password */}
-            <div className='bg-white rounded-lg shadow p-6 border'>
-                <h2 className='text-lg font-semibold mb-3 text-gray-700'>
+            <div className='rounded-lg shadow p-6 border bg-white dark:bg-gray-800 dark:border-gray-700'>
+                <h2 className='text-lg font-semibold mb-3 text-gray-700 dark:text-gray-200'>
                     Change Password
                 </h2>
                 <div className='space-y-3'>
@@ -143,12 +137,13 @@ const MePage = () => {
                             placeholder='Old Password'
                             value={oldPassword}
                             onChange={(e) => setOldPassword(e.target.value)}
-                            className='border rounded w-full p-2 focus:ring-1 focus:ring-red-400 pr-10'
+                            className='border rounded w-full p-2 focus:ring-1 focus:ring-red-400 pr-10
+                            bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600'
                         />
                         <button
                             type='button'
                             onClick={() => setShowOld(!showOld)}
-                            className='absolute inset-y-0 right-2 flex items-center text-gray-600 text-xl'
+                            className='absolute inset-y-0 right-2 flex items-center text-gray-600 dark:text-gray-400 text-xl'
                         >
                             {showOld ? <FaEyeSlash /> : <FaEye />}
                         </button>
@@ -161,12 +156,13 @@ const MePage = () => {
                             placeholder='New Password'
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
-                            className='border rounded w-full p-2 focus:ring-1 focus:ring-red-400 pr-10'
+                            className='border rounded w-full p-2 focus:ring-1 focus:ring-red-400 pr-10
+                            bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600'
                         />
                         <button
                             type='button'
                             onClick={() => setShowNew(!showNew)}
-                            className='absolute inset-y-0 right-2 flex items-center text-gray-600 text-xl'
+                            className='absolute inset-y-0 right-2 flex items-center text-gray-600 dark:text-gray-400 text-xl'
                         >
                             {showNew ? <FaEyeSlash /> : <FaEye />}
                         </button>
@@ -179,12 +175,13 @@ const MePage = () => {
                             placeholder='Confirm New Password'
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            className='border rounded w-full p-2 focus:ring-1 focus:ring-red-400 pr-10'
+                            className='border rounded w-full p-2 focus:ring-1 focus:ring-red-400 pr-10
+                            bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600'
                         />
                         <button
                             type='button'
                             onClick={() => setShowConfirm(!showConfirm)}
-                            className='absolute inset-y-0 right-2 flex items-center text-gray-600 text-xl'
+                            className='absolute inset-y-0 right-2 flex items-center text-gray-600 dark:text-gray-400 text-xl'
                         >
                             {showConfirm ? <FaEyeSlash /> : <FaEye />}
                         </button>

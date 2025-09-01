@@ -28,6 +28,14 @@ export const driverApi = baseApi.injectEndpoints({
             providesTags: ['DRIVER'],
         }),
 
+        getDailyEarnings: builder.query({
+            query: () => ({
+                url: '/driver/daily-earnings',
+                method: 'GET',
+            }),
+            providesTags: ['DRIVER'],
+        }),
+
         getMyPick: builder.query({
             query: () => ({
                 url: '/driver/my-rides',
@@ -44,4 +52,5 @@ export const {
     useUpdateDriveMutation,
     useGetAvailableRideQuery,
     useGetMyPickQuery,
+    useGetDailyEarningsQuery,
 } = driverApi;

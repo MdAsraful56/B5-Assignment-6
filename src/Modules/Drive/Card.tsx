@@ -1,5 +1,6 @@
 import { CheckCircle2, DollarSign, Map, MapPin, XCircle } from 'lucide-react';
 import React from 'react';
+import { toast } from 'sonner';
 import { useUpdateDriveMutation } from '../../Redux/Features/Driver/driver.api';
 
 interface Pick {
@@ -21,29 +22,33 @@ const Card: React.FC<CardProps> = ({ pick }) => {
 
     const handleComplete = async (id: string) => {
         try {
-            const res = await updateDrive({
+            await updateDrive({
                 id,
                 status: 'COMPLETED',
             }).unwrap();
-            console.log(res, 'response from handle complete');
+            // console.log(res, 'response from handle complete');
+            toast.success('✅ Ride marked as completed!');
         } catch (error) {
             console.log(error);
+            toast.error('Failed to mark ride as completed!');
         }
     };
 
     const handleCancel = async (id: string) => {
         try {
-            const res = await updateDrive({
+            await updateDrive({
                 id,
                 status: 'CANCELLED',
             }).unwrap();
-            console.log(res, 'response from handle cancel');
+            // console.log(res, 'response from handle cancel');
+            toast.success(' ❌ Ride marked as cancelled!');
         } catch (error) {
             console.log(error);
+            toast.error('Failed to mark ride as cancelled!');
         }
     };
 
-    // 🔒 disable condition
+    // disable condition
     const isActionDisabled =
         pick.status === 'COMPLETED' || pick.status === 'CANCELLED';
 
@@ -92,8 +97,25 @@ const Card: React.FC<CardProps> = ({ pick }) => {
                 </div>
             </div>
 
+            {!isActionDisabled && (
+                <div className='mt-4 flex gap-3'>
+                    <button
+                        onClick={() => handleCancel(pick._id)}
+                        className='flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg font-semibold transition-all duration-200 shadow-sm bg-red-500 hover:bg-red-600 text-white hover:shadow-md'
+                    >
+                        <XCircle size={20} /> Cancel
+                    </button>
+                    <button
+                        onClick={() => handleComplete(pick._id)}
+                        className='flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg font-semibold transition-all duration-200 shadow-sm bg-green-500 hover:bg-green-600 text-white hover:shadow-md'
+                    >
+                        <CheckCircle2 size={20} /> Complete
+                    </button>
+                </div>
+            )}
+
             {/* Action Buttons */}
-            <div className='mt-4 flex gap-3'>
+            {/* <div className='mt-4 flex gap-3'>
                 <button
                     onClick={() => handleCancel(pick._id)}
                     disabled={isActionDisabled}
@@ -116,7 +138,7 @@ const Card: React.FC<CardProps> = ({ pick }) => {
                 >
                     <CheckCircle2 size={20} /> Complete
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 };
