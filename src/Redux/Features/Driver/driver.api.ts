@@ -11,19 +11,11 @@ export const driverApi = baseApi.injectEndpoints({
             invalidatesTags: ['DRIVER'],
         }),
 
-        // removeRide: builder.mutation({
-        //     query: (rideId) => ({
-        //         url: `/ride/${rideId}`,
-        //         method: 'DELETE',
-        //     }),
-        //     invalidatesTags: ['DRIVER'],
-        // }),
-
         updateDrive: builder.mutation({
             query: ({ id, status }) => ({
                 url: `/driver/update-ride-status/${id}`,
                 method: 'PATCH',
-                body: { status },
+                data: { status },
             }),
             invalidatesTags: ['DRIVER'],
         }),
