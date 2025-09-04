@@ -39,7 +39,7 @@ export default function AllUserDetailsCard({
     };
 
     return (
-        <section className='w-full min-h-screen bg-gray-50 py-12'>
+        <section className='w-full min-h-screen py-12'>
             <div className='max-w-6xl mx-auto px-6'>
                 <h1 className='text-3xl font-bold mb-6'>
                     User Management <span className=''>({users.length})</span>
@@ -49,7 +49,7 @@ export default function AllUserDetailsCard({
                     <CardContent className='overflow-x-auto'>
                         <table className='w-full border-collapse'>
                             <thead>
-                                <tr className='bg-gray-100 text-left'>
+                                <tr className=' text-left'>
                                     <th className='p-3'>Picture</th>
                                     <th className='p-3'>Name</th>
                                     <th className='p-3'>Email</th>
@@ -68,7 +68,7 @@ export default function AllUserDetailsCard({
                                                     className='w-10 h-10 rounded-full object-cover'
                                                 />
                                             ) : (
-                                                <div className='w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center'>
+                                                <div className='w-10 h-10 rounded-full border-2 flex items-center justify-center'>
                                                     {user.name.charAt(0)}
                                                 </div>
                                             )}

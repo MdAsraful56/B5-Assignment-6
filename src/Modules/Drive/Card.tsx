@@ -1,5 +1,6 @@
 import { CheckCircle2, DollarSign, Map, MapPin, XCircle } from 'lucide-react';
 import React from 'react';
+import { toast } from 'sonner';
 import { useUpdateDriveMutation } from '../../Redux/Features/Driver/driver.api';
 
 interface Pick {
@@ -19,29 +20,37 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ pick }) => {
     const [updateDrive] = useUpdateDriveMutation();
 
-    // const handleComplete = async (id: string, pick: Pick) => {
-    //     try {
-    //         const res = await updateDrive({
-    //             id,
-    //             status: 'COMPLETED',
-    //         }).unwrap();
-    //         console.log(res, 'response from handle complete');
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
     const handleComplete = async (id: string) => {
         try {
-            const res = await updateDrive({
+            await updateDrive({
                 id,
                 status: 'COMPLETED',
             }).unwrap();
-            console.log(res, 'response from handle complete');
+            // console.log(res, 'response from handle complete');
+            toast.success('✅ Ride marked as completed!');
         } catch (error) {
             console.log(error);
+            toast.error('Failed to mark ride as completed!');
         }
     };
+
+    const handleCancel = async (id: string) => {
+        try {
+            await updateDrive({
+                id,
+                status: 'CANCELLED',
+            }).unwrap();
+            // console.log(res, 'response from handle cancel');
+            toast.success(' ❌ Ride marked as cancelled!');
+        } catch (error) {
+            console.log(error);
+            toast.error('Failed to mark ride as cancelled!');
+        }
+    };
+
+    // disable condition
+    const isActionDisabled =
+        pick.status === 'COMPLETED' || pick.status === 'CANCELLED';
 
     return (
         <div className='bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all p-6 flex flex-col justify-between hover:scale-[1.02] duration-200'>
@@ -88,21 +97,48 @@ const Card: React.FC<CardProps> = ({ pick }) => {
                 </div>
             </div>
 
-            {/* Buttons */}
-            <div className='mt-4 flex gap-3'>
+            {!isActionDisabled && (
+                <div className='mt-4 flex gap-3'>
+                    <button
+                        onClick={() => handleCancel(pick._id)}
+                        className='flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg font-semibold transition-all duration-200 shadow-sm bg-red-500 hover:bg-red-600 text-white hover:shadow-md'
+                    >
+                        <XCircle size={20} /> Cancel
+                    </button>
+                    <button
+                        onClick={() => handleComplete(pick._id)}
+                        className='flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg font-semibold transition-all duration-200 shadow-sm bg-green-500 hover:bg-green-600 text-white hover:shadow-md'
+                    >
+                        <CheckCircle2 size={20} /> Complete
+                    </button>
+                </div>
+            )}
+
+            {/* Action Buttons */}
+            {/* <div className='mt-4 flex gap-3'>
                 <button
-                    onClick={() => console.log('Cancel clicked')}
-                    className='flex-1 flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg font-semibold transition-all duration-200 shadow-sm hover:shadow-md'
+                    onClick={() => handleCancel(pick._id)}
+                    disabled={isActionDisabled}
+                    className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg font-semibold transition-all duration-200 shadow-sm ${
+                        isActionDisabled
+                            ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                            : 'bg-red-500 hover:bg-red-600 text-white hover:shadow-md'
+                    }`}
                 >
                     <XCircle size={20} /> Cancel
                 </button>
                 <button
-                    onClick={() => handleComplete(pick._id, pick)}
-                    className='flex-1 flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg font-semibold transition-all duration-200 shadow-sm hover:shadow-md'
+                    onClick={() => handleComplete(pick._id)}
+                    disabled={isActionDisabled}
+                    className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg font-semibold transition-all duration-200 shadow-sm ${
+                        isActionDisabled
+                            ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                            : 'bg-green-500 hover:bg-green-600 text-white hover:shadow-md'
+                    }`}
                 >
-                    <CheckCircle2 size={20} /> Completed
+                    <CheckCircle2 size={20} /> Complete
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 };

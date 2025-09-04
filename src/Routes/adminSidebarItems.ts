@@ -2,10 +2,8 @@ import AllDriver from '../Modules/Admin/AllDriver';
 import AllRider from '../Modules/Admin/AllRider';
 import AllUser from '../Modules/Admin/AllUser';
 import Analytics from '../Modules/Admin/Analytics';
-import CreateRide from '../Modules/Admin/Rider/CreateRide';
-import GetMyRide from '../Modules/Admin/Rider/GetMyRide';
-import RideAnalytics from '../Modules/Admin/Rider/RideAnalytic';
-import GetCompletedRide from '../Modules/Ride/GetCompletedRide';
+import DriverAnalytic from '../Modules/Admin/DriverAnalytic';
+import RideAnalytics from '../Modules/Admin/RideAnalytic';
 import type { ISidebarItem } from '../Types/Index';
 
 export const adminSidebarItems: ISidebarItem[] = [
@@ -19,6 +17,7 @@ export const adminSidebarItems: ISidebarItem[] = [
             },
         ],
     },
+
     {
         title: 'Get User Details',
         items: [
@@ -49,142 +48,41 @@ export const adminSidebarItems: ISidebarItem[] = [
                 component: RideAnalytics,
             },
             {
-                title: 'Create Ride',
-                url: '/dashboard/create-ride',
-                component: CreateRide,
+                title: 'All Riders',
+                url: '/dashboard/all-riders',
+                component: AllRider,
             },
-            {
-                title: 'Get My Ride',
-                url: '/dashboard/get-my-ride',
-                component: GetMyRide,
-            },
-            {
-                title: 'Get Completed Ride',
-                url: '/dashboard/get-completed-ride',
-                component: GetCompletedRide,
-            },
+            // {
+            //     title: 'Create Ride',
+            //     url: '/dashboard/create-ride',
+            //     component: CreateRide,
+            // },
+            // {
+            //     title: 'Get My Ride',
+            //     url: '/dashboard/get-my-ride',
+            //     component: GetMyRide,
+            // },
+            // {
+            //     title: 'Get Completed Ride',
+            //     url: '/dashboard/get-completed-ride',
+            //     component: GetCompletedRide,
+            // },
         ],
     },
 
-    // {
-    //     title: 'Building Your Application',
-    //     url: '#',
-    //     items: [
-    //         {
-    //             title: 'Routing',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Data Fetching',
-    //             url: '#',
-    //             isActive: true,
-    //         },
-    //         {
-    //             title: 'Rendering',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Caching',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Styling',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Optimizing',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Configuring',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Testing',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Authentication',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Deploying',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Upgrading',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Examples',
-    //             url: '#',
-    //         },
-    //     ],
-    // },
-    // {
-    //     title: 'API Reference',
-    //     url: '#',
-    //     items: [
-    //         {
-    //             title: 'Components',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'File Conventions',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Functions',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'next.config.js Options',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'CLI',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Edge Runtime',
-    //             url: '#',
-    //         },
-    //     ],
-    // },
-    // {
-    //     title: 'Architecture',
-    //     url: '#',
-    //     items: [
-    //         {
-    //             title: 'Accessibility',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Fast Refresh',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Next.js Compiler',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Supported Browsers',
-    //             url: '#',
-    //         },
-    //         {
-    //             title: 'Turbopack',
-    //             url: '#',
-    //         },
-    //     ],
-    // },
-    // {
-    //     title: 'Community',
-    //     url: '#',
-    //     items: [
-    //         {
-    //             title: 'Contribution Guide',
-    //             url: '#',
-    //         },
-    //     ],
-    // },
+    {
+        title: 'Driver',
+        items: [
+            {
+                title: 'Driver Analytics',
+                url: '/dashboard/driver-analytics',
+                component: DriverAnalytic,
+            },
+            {
+                title: 'All Drivers',
+                url: '/dashboard/all-drivers',
+                component: AllDriver,
+            },
+        ],
+    },
 ];

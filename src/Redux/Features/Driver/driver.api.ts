@@ -11,19 +11,11 @@ export const driverApi = baseApi.injectEndpoints({
             invalidatesTags: ['DRIVER'],
         }),
 
-        // removeRide: builder.mutation({
-        //     query: (rideId) => ({
-        //         url: `/ride/${rideId}`,
-        //         method: 'DELETE',
-        //     }),
-        //     invalidatesTags: ['DRIVER'],
-        // }),
-
         updateDrive: builder.mutation({
             query: ({ id, status }) => ({
                 url: `/driver/update-ride-status/${id}`,
                 method: 'PATCH',
-                body: { status },
+                data: { status },
             }),
             invalidatesTags: ['DRIVER'],
         }),
@@ -31,6 +23,14 @@ export const driverApi = baseApi.injectEndpoints({
         getAvailableRide: builder.query({
             query: () => ({
                 url: '/driver/available-rides',
+                method: 'GET',
+            }),
+            providesTags: ['DRIVER'],
+        }),
+
+        getDailyEarnings: builder.query({
+            query: () => ({
+                url: '/driver/daily-earnings',
                 method: 'GET',
             }),
             providesTags: ['DRIVER'],
@@ -52,4 +52,5 @@ export const {
     useUpdateDriveMutation,
     useGetAvailableRideQuery,
     useGetMyPickQuery,
+    useGetDailyEarningsQuery,
 } = driverApi;

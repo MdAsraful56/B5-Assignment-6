@@ -30,6 +30,54 @@ const items = [
         content:
             'All drivers are verified, trips are GPS-tracked, and an in-app SOS button ensures safety. Riders can add multiple stops, leave ratings and feedback, and even switch between rider and driver modes in the same app.',
     },
+    {
+        id: '5',
+        title: 'Can I share my ride with others?',
+        content:
+            'Yes, the app allows you to share a ride with friends or family. You can invite others to join your trip, and fares will be split automatically.',
+    },
+    {
+        id: '6',
+        title: 'Is there a loyalty or rewards program?',
+        content:
+            'Yes, frequent riders earn points for every ride, which can be redeemed for discounts or free rides. Check the app’s "Rewards" section for details.',
+    },
+    {
+        id: '7',
+        title: 'What if I lose an item in the car?',
+        content:
+            'If you leave something in the vehicle, contact the driver through the app immediately. You can also reach out to support to help recover your item.',
+    },
+    {
+        id: '8',
+        title: 'Can I book rides for someone else?',
+        content:
+            'Yes, you can book a ride for another person by entering their pickup and drop-off locations. The driver will contact the person directly if needed.',
+    },
+    {
+        id: '9',
+        title: 'Are pets allowed in the rides?',
+        content:
+            'Small pets in carriers are allowed. Make sure to mention your pet in the booking so the driver is prepared.',
+    },
+    {
+        id: '10',
+        title: 'How do I report an issue or give feedback?',
+        content:
+            'You can report issues or leave feedback directly in the app under "Help & Support." This ensures the team can take action quickly.',
+    },
+    {
+        id: '11',
+        title: 'Can I schedule recurring rides?',
+        content:
+            'Yes, you can set up recurring rides for daily commutes or regular trips. Choose the frequency and time in the scheduling section of the app.',
+    },
+    {
+        id: '12',
+        title: 'Is the app available in multiple languages?',
+        content:
+            'Yes, the app supports multiple languages. You can change your preferred language in the settings.',
+    },
 ];
 
 // const data = [

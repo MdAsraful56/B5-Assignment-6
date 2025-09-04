@@ -69,7 +69,7 @@ export const router = createBrowserRouter([
         Component: DashboardLayout,
         path: '/dashboard',
         children: [
-            { index: true, element: <Navigate to='/dashboard' /> },
+            { index: true, element: <Navigate to='/dashboard/analytics' /> },
             ...generateRoutes(adminSidebarItems),
         ],
     },
