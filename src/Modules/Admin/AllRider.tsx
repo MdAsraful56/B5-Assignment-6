@@ -4,6 +4,7 @@ import {
     useGetAllRidersQuery,
     useUpdateUserMutation,
 } from '../../Redux/Features/Auth/auth.api';
+import NavigateHome from '../../Utils/NavigateHome';
 import AllUserDetailsCard from './AllUserDetailsCard';
 
 const AllRider = () => {
@@ -42,6 +43,9 @@ const AllRider = () => {
     return (
         <div>
             {/* <span className='text-muted'> ({data?.data?.length || 0})</span> */}
+            <div className=''>
+                <NavigateHome />
+            </div>
 
             {data?.data ? (
                 <AllUserDetailsCard

@@ -1,4 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import NavigateHome from '../../Utils/NavigateHome';
 import DriverAnalytic from './DriverAnalytic';
 import Earning from './Earning';
 import OverView from './OverView';
@@ -7,6 +8,17 @@ import RideAnalytics from './RideAnalytic';
 const Analytics = () => {
     return (
         <div className='p-6 space-y-6'>
+            <div className=''>
+                <NavigateHome />
+                {/* <Button
+                    variant='ghost'
+                    size='sm'
+                    className='ml-auto mb-4'
+                    onClick={handleBackToHome}
+                >
+                    Back to Home
+                </Button> */}
+            </div>
             <h1 className='text-3xl font-bold text-center'>
                 Analytics Dashboard
             </h1>

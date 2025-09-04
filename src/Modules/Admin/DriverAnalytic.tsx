@@ -14,6 +14,7 @@ import {
 import { useGetAllUsersQuery } from '../../Redux/Features/Auth/auth.api';
 import { useGetDailyEarningsQuery } from '../../Redux/Features/Driver/driver.api';
 import { useGetAllRideQuery } from '../../Redux/Features/Ride/ride.api';
+import NavigateHome from '../../Utils/NavigateHome';
 
 const DriverAnalytic = () => {
     const { data: allUsersData } = useGetAllUsersQuery(undefined);
@@ -72,6 +73,9 @@ const DriverAnalytic = () => {
 
     return (
         <div className='p-6 space-y-8'>
+            <div className=''>
+                <NavigateHome />
+            </div>
             <h1 className='text-3xl font-bold text-center'>Driver Analytics</h1>
 
             {/* Top Stat Cards */}

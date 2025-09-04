@@ -24,28 +24,40 @@ import {
 import { useAppDispatch } from '../../Redux/hooks';
 import { ModeToggle } from './mode-toggle';
 
-// Navigation links array to be used in both desktop and mobile menus
+// navigation link
 const navigationLinks = [
     { href: '/', label: 'Home', role: 'PUBLIC' },
     { href: '/ride', label: 'Ride', role: role.rider },
     { href: '/drive', label: 'Drive', role: role.driver },
     { href: '/features', label: 'Features', role: 'PUBLIC' },
-    { href: '/about', label: 'About Us', role: 'PUBLIC' },
     { href: '/faq', label: 'FAQ', role: 'PUBLIC' },
-    { href: '/dashboard', label: 'Dashboard', role: 'ADMIN' },
+    { href: '/about', label: 'About Us', role: 'PUBLIC' },
     { href: '/me', label: 'Me', role: 'USER' },
+    { href: '/dashboard', label: 'Dashboard', role: 'ADMIN' },
 ];
 
 export default function Navbar() {
     const { data } = useUserInfoQuery(undefined);
     const [logout] = useLogoutMutation();
     const dispatch = useAppDispatch();
-    console.log(data?.data?.data);
+
+    const user = data?.data?.data;
+    const isLoggedIn = !!user?.email;
 
     const handleLogout = async () => {
         await logout(undefined);
         dispatch(authApi.util.resetApiState());
     };
+
+    const filteredLinks = navigationLinks.filter((link) => {
+        if (
+            (link.href === '/dashboard' || link.href === '/me') &&
+            !isLoggedIn
+        ) {
+            return false;
+        }
+        return true;
+    });
 
     return (
         <header className='border-b px-4 md:px-6'>
@@ -94,7 +106,7 @@ export default function Navbar() {
                             >
                                 <NavigationMenu className='max-w-none *:w-full'>
                                     <NavigationMenuList className='flex-col items-start gap-0 md:gap-2'>
-                                        {navigationLinks.map((link, index) => (
+                                        {filteredLinks.map((link, index) => (
                                             <NavigationMenuItem
                                                 key={index}
                                                 className='w-full'
@@ -123,7 +135,7 @@ export default function Navbar() {
                         {/* Navigation menu */}
                         <NavigationMenu className='h-full *:h-full max-md:hidden'>
                             <NavigationMenuList className='h-full gap-2'>
-                                {navigationLinks.map((link, index) => (
+                                {filteredLinks.map((link, index) => (
                                     <NavigationMenuItem
                                         key={index}
                                         className='h-full'
@@ -145,7 +157,7 @@ export default function Navbar() {
                     <Button asChild size='sm' className='text-sm'>
                         <ModeToggle />
                     </Button>
-                    {data?.data?.data?.email && (
+                    {isLoggedIn ? (
                         <Button
                             onClick={handleLogout}
                             variant='outline'
@@ -153,8 +165,7 @@ export default function Navbar() {
                         >
                             Logout
                         </Button>
-                    )}
-                    {!data?.data?.data?.email && (
+                    ) : (
                         <Button asChild className='text-sm'>
                             <Link to='/login'>Login</Link>
                         </Button>

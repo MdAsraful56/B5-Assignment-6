@@ -5,6 +5,7 @@ import {
     useGetAllUsersQuery,
     useUpdateUserMutation,
 } from '../../Redux/Features/Auth/auth.api';
+import NavigateHome from '../../Utils/NavigateHome';
 import AllUserDetailsCard from './AllUserDetailsCard';
 
 const AllUser = () => {
@@ -55,6 +56,9 @@ const AllUser = () => {
 
     return (
         <div>
+            <div className=''>
+                <NavigateHome />
+            </div>
             {data?.data ? (
                 <AllUserDetailsCard
                     users={data.data}

@@ -1,6 +1,7 @@
 import { FaCar, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
 import { useGetAllRideQuery } from '../../Redux/Features/Ride/ride.api';
+import NavigateHome from '../../Utils/NavigateHome';
 
 function RideAnalytics() {
     const { data, isLoading } = useGetAllRideQuery(undefined);
@@ -41,8 +42,11 @@ function RideAnalytics() {
 
     return (
         <div className='p-6'>
+            <div className=''>
+                <NavigateHome />
+            </div>
             {/* Header */}
-            <div className='mb-8 text-center'>
+            <div className='mb-8 mt-10 text-center'>
                 <h1 className='text-3xl font-bold'>🚖 Rider Analytics</h1>
                 <p className='text-gray-400 mt-2'>
                     Quick summary of your ride performance
